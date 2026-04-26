@@ -1,0 +1,167 @@
+Unoptimized Three-Address Code (TAC)
+=====================================
+Intermediate representation with functions
+
+  1: FUNC_BEGIN __mod
+  2: PARAM a
+  3: PARAM b
+  4: DECL q
+  5: t0 = a / b
+  6: q = t0
+  7: t0 = q * b
+  8: t1 = a - t0
+  9: RETURN t1
+ 10: FUNC_END __mod
+ 11: FUNC_BEGIN __and
+ 12: PARAM a
+ 13: PARAM b
+ 14: IF_FALSE a GOTO L1
+ 15: IF_FALSE b GOTO L3
+ 16: RETURN 1
+ 17: L3:
+ 18: L1:
+ 19: RETURN 0
+ 20: FUNC_END __and
+ 21: FUNC_BEGIN __or
+ 22: PARAM a
+ 23: PARAM b
+ 24: IF_FALSE a GOTO L5
+ 25: RETURN 1
+ 26: L5:
+ 27: IF_FALSE b GOTO L7
+ 28: RETURN 1
+ 29: L7:
+ 30: RETURN 0
+ 31: FUNC_END __or
+ 32: FUNC_BEGIN __not
+ 33: PARAM a
+ 34: IF_FALSE a GOTO L9
+ 35: RETURN 0
+ 36: L9:
+ 37: RETURN 1
+ 38: FUNC_END __not
+ 39: FUNC_BEGIN main
+ 40: DECL x
+ 41: DECL y
+ 42: DECL result
+ 43: PRINT 111
+ 44: x = 5
+ 45: t1 = x > 3
+ 46: IF_FALSE t1 GOTO L11
+ 47: PRINT 1
+ 48: L11:
+ 49: PRINT 222
+ 50: x = 2
+ 51: t1 = x > 5
+ 52: IF_FALSE t1 GOTO L12
+ 53: PRINT 0
+ 54: GOTO L13
+ 55: L12:
+ 56: PRINT 1
+ 57: L13:
+ 58: PRINT 333
+ 59: x = 7
+ 60: y = 3
+ 61: t1 = x > 5
+ 62: IF_FALSE t1 GOTO L14
+ 63: t1 = y < 5
+ 64: IF_FALSE t1 GOTO L16
+ 65: PRINT 1
+ 66: GOTO L17
+ 67: L16:
+ 68: PRINT 0
+ 69: L17:
+ 70: GOTO L15
+ 71: L14:
+ 72: PRINT 0
+ 73: L15:
+ 74: PRINT 444
+ 75: x = 2
+ 76: DECL _sw0
+ 77: _sw0 = x
+ 78: t1 = _sw0 == 1
+ 79: IF_FALSE t1 GOTO L18
+ 80: PRINT 10
+ 81: GOTO L19
+ 82: L18:
+ 83: t1 = _sw0 == 2
+ 84: IF_FALSE t1 GOTO L20
+ 85: PRINT 20
+ 86: GOTO L21
+ 87: L20:
+ 88: t1 = _sw0 == 3
+ 89: IF_FALSE t1 GOTO L22
+ 90: PRINT 30
+ 91: GOTO L23
+ 92: L22:
+ 93: PRINT 99
+ 94: L23:
+ 95: L21:
+ 96: L19:
+ 97: PRINT 555
+ 98: x = 9
+ 99: DECL _sw1
+100: _sw1 = x
+101: t1 = _sw1 == 1
+102: IF_FALSE t1 GOTO L24
+103: PRINT 10
+104: GOTO L25
+105: L24:
+106: t1 = _sw1 == 2
+107: IF_FALSE t1 GOTO L26
+108: PRINT 20
+109: GOTO L27
+110: L26:
+111: PRINT 99
+112: L27:
+113: L25:
+114: PRINT 666
+115: x = 5
+116: y = 3
+117: t1 = x > 3
+118: ARG t1
+119: t0 = y < 5
+120: ARG t0
+121: t2 = CALL __and, 2
+122: IF_FALSE t2 GOTO L28
+123: PRINT 1
+124: GOTO L29
+125: L28:
+126: PRINT 0
+127: L29:
+128: PRINT 777
+129: x = 1
+130: y = 10
+131: t2 = x > 5
+132: ARG t2
+133: t3 = y > 5
+134: ARG t3
+135: t4 = CALL __or, 2
+136: IF_FALSE t4 GOTO L30
+137: PRINT 1
+138: GOTO L31
+139: L30:
+140: PRINT 0
+141: L31:
+142: PRINT 888
+143: x = 0
+144: ARG x
+145: t4 = CALL __not, 1
+146: IF_FALSE t4 GOTO L32
+147: PRINT 1
+148: GOTO L33
+149: L32:
+150: PRINT 0
+151: L33:
+152: PRINT 999
+153: x = 4
+154: y = 6
+155: t4 = x > 2
+156: ARG t4
+157: t5 = y > 4
+158: ARG t5
+159: t6 = CALL __and, 2
+160: result = t6
+161: PRINT result
+162: RETURN 0
+163: FUNC_END main
